@@ -1,0 +1,33 @@
+
+.persona{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-height: 400px;
+}
+
+.foto{
+    display: flex;
+    width: 30%;
+    background-color: blue;
+}
+
+.info{
+    display: flex;
+    width: 70%;
+    background-color: bisque;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

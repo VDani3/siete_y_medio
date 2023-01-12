@@ -1,0 +1,40 @@
+
+.head{
+    display: flex;
+    max-height: 90px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./Images/backgrounds/background2.jpg");
+}
+
+img {
+    max-height: 80px;
+    transform: scale3d(1, 1, 1);
+    transition: transform 0.5s cubic-bezier(.47,1.64,.41,.8);
+}
+
+img:hover{
+    transform: scale3d(1.2, 1.2, 1.2);
+}
+
+.esfera1{
+    color: green;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    animation: anim 1s infinite linear;
+}
+
+
+@keyframes anim {
+    0%{right: 0%;
+       opacity: 1;}
+    25%{right: 100%;
+        opacity: 1;}
+    50%{right: 0%;
+        opacity: 0;}
+    75%{right: 100%;}
+    100%{right: 0%;
+         opacity: 0;}
+}

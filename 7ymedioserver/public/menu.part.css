@@ -1,0 +1,72 @@
+.menu{
+    --height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: var(--height);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    opacity: 0.2;
+    transition: opacity linear 0.5s;
+}
+.menu:hover{
+    opacity: 1;
+}
+
+img{
+    background-image: url("./images/pattern.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    position:absolute;
+    opacity: 0.2;
+    height: var(--height);
+    width: 100%;
+    z-index: 1;
+    animation: anim 60s infinite linear;
+}
+
+a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+    z-index: 10;
+}
+
+.seccion{
+    min-width: 40px;
+    padding: 15px 30px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: 0.2s;
+    color: rgb(255, 255, 255);
+    z-index: 9;
+}
+
+.seccion:hover{
+    background-color: orange;
+    box-shadow: 0 0 10px orange, 0 0 40px orange, 0 0 80px orange;
+}
+
+@keyframes anim {
+    0% { background-position: 0%; }
+    100% { background-position: 100%;}
+}
+
+@media only screen and (max-width: 768px) {
+    .a{
+        max-width: 10%;
+        font-size: 1em;
+    }
+    .seccion{
+        margin: 4px;
+        padding: 3%;
+        font-size: 1em;
+        height: 100%;
+    }
+}

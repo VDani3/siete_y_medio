@@ -1,5 +1,6 @@
 import random
 
+import pyfiglet
 
 """
 
@@ -193,9 +194,9 @@ def tablaRemo(dict={}):
         'print(listaidh[num],listanamh[num],listatyh[num],listaidb[num],listanamb[num],listatyb[num])'
         num += 1
     print("*" * 80)
-
-tablaRemo(players)
-
+print("*"*90)
+print(pyfiglet.figlet_format("Seven And  Half\nEsteve Terradas i illa",justify="center"))
+print("*"*90)
 
 
 

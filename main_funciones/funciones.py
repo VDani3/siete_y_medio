@@ -1,7 +1,7 @@
 import random
 from dictionary import *
 import os
-
+import pyfiglet    # libreria para los titulos
 #De antes
 def clear():
     if os.name == "nt":
@@ -30,10 +30,10 @@ def new_nif(dict={}):
                 lista.append(i)
             letrasDni = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N",
                          "J", "Z", "S", "Q", "V", "H", "L", "L", "C", "K", "E"]
-            dni=input("DNI of the new Player:  ")
+            dni=input(" "*30+"DNI of the new Player:  ")
             if len(dni)<9 and not dni[-1].isalpha() and not dni[:8].isdigit(): # comprova que es adequat el format
                 raise ValueError ("El NIF no te un format adequat (8 números i una lletra)")
-            if letrasDni[int(dni[:8]) % 23] == dni[8]: # comprova que la lletra es correcte
+            if letrasDni[int(dni[:8]) % 23] == dni[8].lower(): # comprova que la lletra es correcte
                 raise ValueError("El NIF no te la lletra correcta")
             if dni in lista:
                 raise ValueError("El NIF ya esta en us")
@@ -58,31 +58,37 @@ def nif_ale(dict={}):
 
 def addPlayer(dict={}):
     clear()
+    titulos("BBDD Players")
+
     nombre=""
     while not nombre.isalpha():
-        nombre = input("Enter your name: ")
+        nombre = input(" "*30+"Enter your name: ")
     clear()
-    print("Name: ",nombre)
+    titulos("BBDD Players")
+    print(" "*30+"Name: ",nombre)
     nif = new_nif(dict)
     clear()
-    print("Name: ", nombre)
-    print("DNI: ", nif)
-    menurie="1) Cautious»\n2) Moderated\n3) Bold"
-    print("Select Profile For The New Boot:\n")
+    titulos("BBDD Players")
+
+    print(" "*30+"Name: ", nombre)
+    print(" "*30+"DNI: ", nif)
+    menurie=" "*30+"1) Cautious»\n"+" "*30+"2) Moderated\n"+" "*30+"3) Bold"
+    print(" "*30+"Select Profile For The New Boot:\n")
     opcrie=getOpt(menurie,"Option: ",[1, 2, 3])
     clear()
-    print("Name: ", nombre)
-    print("DNI: ", nif)
+    titulos("BBDD Players")
+    print(" "*30+"Name: ", nombre)
+    print(" "*30+"DNI: ", nif)
     if opcrie==1:
         rie=50
-        print("Profile: Cautious")
+        print(" "*30+"Profile: Cautious")
     if opcrie == 2:
         rie = 40
-        print("Profile: Moderated")
+        print(" "*30+"Profile: Moderated")
     if opcrie == 3:
         rie = 30
-        print("Profile: Bold")
-    op=input("Is ok ? Y/n:n")
+        print(" "*30+"Profile: Bold")
+    op=input(" "*30+"Is ok ? Y/n:n")
     if op == "Y" or op == "y":
         dict[nif] = {"name": nombre, "human": True, "bank": False, "initialCard": "", "type": rie, "bet": 0,
                        "points": 0, "cards": [], "roundPoints": 0}
@@ -92,31 +98,37 @@ def addPlayer(dict={}):
 
 def addPlayerB(dict={}):
     clear()
+    titulos("BBDD Players")
+
     nombre = ""
     while not nombre.isalpha():
-        nombre = input("Enter your name: ")
+        nombre = input(" "*30+"Enter your name: ")
     clear()
-    print("Name: ", nombre)
+    titulos("BBDD Players")
+
+    print(" "*30+"Name: ", nombre)
     nif = nif_ale(dict)
     clear()
-    print("Name: ", nombre)
-    print("DNI: ", nif)
-    print("Select Profile For The New Boot:\n")
-    menurie = "1) Cautious»\n2) Moderated\n3) Bold"
+    titulos("BBDD Players")
+    print(" "*30+"Name: ", nombre)
+    print(" "*30+"DNI: ", nif)
+    print(" "*30+"Select Profile For The New Boot:\n")
+    menurie = " "*30+"1) Cautious»\n"+" "*30+"2) Moderated\n"+" "*30+"3) Bold"
     opcrie = getOpt(menurie, "Option: ", [1, 2, 3])
     clear()
-    print("Name: ", nombre)
-    print("DNI: ", nif)
+    titulos("BBDD Players")
+    print(" "*30+"Name: ", nombre)
+    print(" "*30+"DNI: ", nif)
     if opcrie == 1:
         rie = 50
-        print("Profile: Cautious")
+        print(" "*30+"Profile: Cautious")
     if opcrie == 2:
         rie = 40
-        print("Profile: Moderated")
+        print(" "*30+"Profile: Moderated")
     if opcrie == 3:
         rie = 30
-        print("Profile: Bold")
-    op = input("Is ok ? Y/n:n")
+        print(" "*30+"Profile: Bold")
+    op = input(" "*30+"Is ok ? Y/n:n")
     if op == "Y" or op == "y":
         dict[nif] = {"name": nombre, "human": False, "bank": False, "initialCard": "", "type": rie, "bet": 0,
                        "points": 0, "cards": [], "roundPoints": 0}
@@ -402,7 +414,57 @@ def quitBank(players):
     for id in player_list:
         players[id]["bank"] = False
     return players
+def titulos(titulo="",extra=""):
+    if extra=="":
+        print("*" * 90)
+    else:
+        print("*"*34+"  "+extra+"  "+"*"*34)
+    print(pyfiglet.figlet_format(titulo, justify="center"))
+    print("*" * 90 + "\n")
 
+def print_ronda(players_game_keys,players_game,players_registered):
+    cadpo = "Points: ".ljust(20)
+    cadn = "Name: ".ljust(20)
+    cadh = "Human: ".ljust(20)
+    cadp = "Priority: ".ljust(20)
+    cadt = "Type: ".ljust(20)
+    cadba = "Bank: ".ljust(20)
+    cadbe = "Bet: ".ljust(20)
+    cadc = "Cards: ".ljust(20)
+    cadr = "RoundPoints:".ljust(20)
+    for printear in players_game_keys:
+        cart = ""
+        cadn += players_registered[printear]["name"].ljust(30)
+        cadh += str(players_registered[printear]["human"]).ljust(30)
+        cadp += str(players_registered[printear]["priority"]).ljust(30)
+        cadt += str(players_registered[printear]["type"]).ljust(30)
+        cadba += str(players_registered[printear]["bank"]).ljust(30)
+        cadbe += str(players_registered[printear]["bet"]).ljust(30)
+        cadpo += str(players_game[printear]["points"]).ljust(30)
+        for j in players_registered[printear]["cards"]:
+            cart+=j+" "
+        cadc += cart.ljust(30)
+        cadr += str(players_registered[printear]["roundPoints"]).ljust(30)
+        # print("Name:"+players_registered[printear]["name"]+"\nHuman:"+str(players_registered[printear]["human"])+"\nPriority:"+str(players_registered[printear]["priority"])+"\nType:"+str(players_registered[printear]["type"])+"\nBank:"+str(players_registered[printear]["bank"])+"\nBet:"+str(players_registered[printear]["bet"])+"\nPoints: "+str(players_game[printear]["points"])+ "\nCards: "+str(players_game[printear]["cards"])+"\nrounPoints: "+str(players_game[printear]["roundPoints"]))
+    cadmaster = cadn + "\n" + cadh + "\n" + cadp + "\n" + cadt + "\n" + cadba + "\n" + cadbe + "\n" + cadpo + "\n" + cadc + "\n" + cadr + "\n"
+
+    print()
+    return cadmaster
+
+def Stats_player (active_players,players_game,players_registered,name):
+    print("*"*37+" "+"Stats of "+name+" "+"*"*37)
+    for id in active_players:
+        if players_game[id]["name"] == name:
+            print(" " * 30 + "Name".ljust(20) + players_game[id]["name"] + "\n" + " " * 30 + "Type".ljust(20) + str(
+            players_registered[id]["type"]) + "\n"
+              + " " * 30 + "Human".ljust(20) + str(players_registered[id]["human"]) + "\n"
+              + " " * 30 + "Bank".ljust(20) + str(players_registered[id]["bank"]) + "\n"
+              + " " * 30 + "Initialcard".ljust(20) + str(players_registered[id]["initialCard"]) + "\n"
+              + " " * 30 + "priority".ljust(20) + str(players_registered[id]["priority"]) + "\n"
+              + " " * 30 + "bet".ljust(20) + str(players_registered[id]["bet"]) + "\n"
+              + " " * 30 + "points".ljust(20) + str(players_registered[id]["points"]) + "\n"
+              + " " * 30 + "cards".ljust(20) + str(players_registered[id]["cards"]) + "\n"
+              + " " * 30 + "roundPoints".ljust(20) + str(players_registered[id]["roundPoints"]))
 
 
 

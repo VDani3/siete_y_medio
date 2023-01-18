@@ -1,7 +1,7 @@
 import random
 from dictionary import *
 import os
-import pyfiglet    # libreria para los titulos
+
 #De antes
 def clear():
     if os.name == "nt":
@@ -30,10 +30,10 @@ def new_nif(dict={}):
                 lista.append(i)
             letrasDni = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N",
                          "J", "Z", "S", "Q", "V", "H", "L", "L", "C", "K", "E"]
-            dni=input(" "*30+"DNI of the new Player:  ")
+            dni=input("DNI of the new Player:  ")
             if len(dni)<9 and not dni[-1].isalpha() and not dni[:8].isdigit(): # comprova que es adequat el format
                 raise ValueError ("El NIF no te un format adequat (8 números i una lletra)")
-            if letrasDni[int(dni[:8]) % 23] == dni[8].lower(): # comprova que la lletra es correcte
+            if letrasDni[int(dni[:8]) % 23] == dni[8]: # comprova que la lletra es correcte
                 raise ValueError("El NIF no te la lletra correcta")
             if dni in lista:
                 raise ValueError("El NIF ya esta en us")
@@ -58,82 +58,70 @@ def nif_ale(dict={}):
 
 def addPlayer(dict={}):
     clear()
-    titulos("BBDD Players")
-
     nombre=""
     while not nombre.isalpha():
-        nombre = input(" "*30+"Enter your name: ")
+        nombre = input("Enter your name: ")
     clear()
-    titulos("BBDD Players")
-    print(" "*30+"Name: ",nombre)
+    print("Name: ",nombre)
     nif = new_nif(dict)
     clear()
-    titulos("BBDD Players")
-
-    print(" "*30+"Name: ", nombre)
-    print(" "*30+"DNI: ", nif)
-    menurie=" "*30+"1) Cautious»\n"+" "*30+"2) Moderated\n"+" "*30+"3) Bold"
-    print(" "*30+"Select Profile For The New Boot:\n")
+    print("Name: ", nombre)
+    print("DNI: ", nif)
+    menurie="1) Cautious»\n2) Moderated\n3) Bold"
+    print("Select Profile For The New Boot:\n")
     opcrie=getOpt(menurie,"Option: ",[1, 2, 3])
     clear()
-    titulos("BBDD Players")
-    print(" "*30+"Name: ", nombre)
-    print(" "*30+"DNI: ", nif)
+    print("Name: ", nombre)
+    print("DNI: ", nif)
     if opcrie==1:
         rie=50
-        print(" "*30+"Profile: Cautious")
-    if opcrie == 2:
+        print("Profile: Cautious")
+    elif opcrie == 2:
         rie = 40
-        print(" "*30+"Profile: Moderated")
-    if opcrie == 3:
+        print("Profile: Moderated")
+    elif opcrie == 3:
         rie = 30
-        print(" "*30+"Profile: Bold")
-    op=input(" "*30+"Is ok ? Y/n:n")
+        print("Profile: Bold")
+    op=input("Is ok ? Y/n:n")
     if op == "Y" or op == "y":
         dict[nif] = {"name": nombre, "human": True, "bank": False, "initialCard": "", "type": rie, "bet": 0,
                        "points": 0, "cards": [], "roundPoints": 0}
         return dict
-    if op == "n"or op == "N":
+    elif op == "n"or op == "N":
         return dict
 
 def addPlayerB(dict={}):
     clear()
-    titulos("BBDD Players")
-
     nombre = ""
     while not nombre.isalpha():
-        nombre = input(" "*30+"Enter your name: ")
+        nombre = input("Enter your name: ")
     clear()
-    titulos("BBDD Players")
-
-    print(" "*30+"Name: ", nombre)
+    print("Name: ", nombre)
     nif = nif_ale(dict)
     clear()
-    titulos("BBDD Players")
-    print(" "*30+"Name: ", nombre)
-    print(" "*30+"DNI: ", nif)
-    print(" "*30+"Select Profile For The New Boot:\n")
-    menurie = " "*30+"1) Cautious»\n"+" "*30+"2) Moderated\n"+" "*30+"3) Bold"
+    print("Name: ", nombre)
+    print("DNI: ", nif)
+    print("Select Profile For The New Boot:\n")
+    menurie = "1) Cautious»\n2) Moderated\n3) Bold"
     opcrie = getOpt(menurie, "Option: ", [1, 2, 3])
     clear()
-    titulos("BBDD Players")
-    print(" "*30+"Name: ", nombre)
-    print(" "*30+"DNI: ", nif)
+    print("Name: ", nombre)
+    print("DNI: ", nif)
     if opcrie == 1:
         rie = 50
-        print(" "*30+"Profile: Cautious")
-    if opcrie == 2:
+        print("Profile: Cautious")
+    elif opcrie == 2:
         rie = 40
-        print(" "*30+"Profile: Moderated")
-    if opcrie == 3:
+        print("Profile: Moderated")
+    elif opcrie == 3:
         rie = 30
-        print(" "*30+"Profile: Bold")
-    op = input(" "*30+"Is ok ? Y/n:n")
+        print("Profile: Bold")
+    op = input("Is ok ? Y/n:n")
     if op == "Y" or op == "y":
         dict[nif] = {"name": nombre, "human": False, "bank": False, "initialCard": "", "type": rie, "bet": 0,
                        "points": 0, "cards": [], "roundPoints": 0}
         return dict
-    if op == "n"or op == "N":
+    elif op == "n"or op == "N":
         return dict
 
 def ordenar(lista):
@@ -154,24 +142,24 @@ def tablaRemo(dict={}):
         if dict[key]["human"] == True:
             listaidh.append(key)
             listaidh=ordenar(listaidh)
-        if dict[key]["human"] == False:
+        elif dict[key]["human"] == False:
             listaidb.append(key)
             listaidb = ordenar(listaidb)
     for j in listaidh:
         listanamh.append(dict[j]["name"])
         if dict[j]["type"]==50:
             listatyh.append("Bold")
-        if dict[j]["type"]==40:
+        elif dict[j]["type"]==40:
             listatyh.append("Moderated")
-        if dict[j]["type"]==30:
+        elif dict[j]["type"]==30:
             listatyh.append("Cautious")
     for h in listaidb:
         listanamb.append(dict[h]["name"])
         if dict[h]["type"]==50:
             listatyb.append("Bold")
-        if dict[h]["type"]==40:
+        elif dict[h]["type"]==40:
             listatyb.append("Moderated")
-        if dict[h]["type"]==30:
+        elif dict[h]["type"]==30:
             listatyb.append("Cautious")
     num=0
     while num!=len(listaidh):
@@ -191,7 +179,6 @@ def tablaRemo(dict={}):
     print("{:<10} {:<15} {:<10} {:<5} {:<10} {:<15} {:<10}".format("ID", "NAME","TYPE","||","ID", "NAME","TYPE"))
     print("*" * 80)
     while num!=len(listaidh):
-
         print("{:<10} {:<15} {:<10} {:<5} {:<10} {:<15} {:<10}".format(listaidh[num], listanamh[num],listatyh[num],"||",listaidb[num],listanamb[num],listatyb[num]))
         'print(listaidh[num],listanamh[num],listatyh[num],listaidb[num],listanamb[num],listatyb[num])'
         num += 1
@@ -243,6 +230,13 @@ def ordenarPlayers(player_dict):
                 players[i], players[i+1] = players[i+1], players[i]
     return players
 
+def orderByPoints(players, player_dict):
+    for pasada in range(0,len(players)-1):    
+        for i in range(0,len(players)-pasada-1):
+            if player_dict[players[i]]["points"] < player_dict[players[i+1]]["points"]:
+                players[i], players[i+1] = players[i+1], players[i]
+    return players
+
 def setPlayers(ids,players = {}):
     result = {}
     for id in ids:
@@ -274,11 +268,11 @@ def roundBot(player, cards):
     while True:
         card = getCard(cards)
         player["cards"].append(card)
-        player["roundPoints"] += cards[card]["value"]
-        del cards[card]
+        player["roundPoints"] += cards[card]["realValue"]
+        cards = removeCardsFromDeck(player, cards)
         if player["roundPoints"] < 7.5:
             getAnotherCard = random.randint(0,100)
-            if getAnotherCard <= player["type"]:
+            if getAnotherCard <= player["type"] or player["roundPoints"] == 0.5:
                 continue
             else:
                 break
@@ -294,7 +288,7 @@ def checkWins(bank,players, points):
     finalPoint = 0
     playerList = list(players.keys())
     for id in playerList:
-        if points <= players[id]["roundPoints"] and players[id]["bank"] == False:
+        if points <= players[id]["roundPoints"] and players[id]["bank"] == False and players[id]["roundPoints"] <= 7.5:
             loseIn.append(id)
         else:
             winIn.append(id)
@@ -318,8 +312,8 @@ def roundBankBot(bank,cards,players,bank_id):
     while True:
         card = getCard(cards)
         bank["cards"].append(card)
-        bank["roundPoints"] += cards[card]["value"]
-        del cards[card]
+        bank["roundPoints"] += cards[card]["realValue"]
+        cards = removeCardsFromDeck(bank, cards)
         if bank["roundPoints"] < 7.5:
             getAnotherCard = checkWins(bank_id, players, bank["roundPoints"])
             if not getAnotherCard:
@@ -339,51 +333,67 @@ def removeCardsFromDeck(player,avaliable_cards):
             result[card] = avaliable_cards[card]
     return result
 
-def pointsGiving(activePlayers,players_dict, bank):                                                 
+def pointsGiving(activePlayers,players_dict, bank):
     players = players_dict
     for id in activePlayers:
-        playerPoints = players[id]["roundPoints"]
-        bankPoints = players[bank]["roundPoints"]
-        if bankPoints > 7.5:
-            if playerPoints == 7.5 and players[id]["bank"] == False:
-                player_bet = players[id]["bet"]*2
-                while player_bet != 0 and players[id]["points"] != 0:
-                    player_bet -= 1
-                    players[id]["points"] += 1
-                    players[bank]["points"] -= 1
-            elif playerPoints < 7.5 and players[id]["bank"] == False:
-                player_bet = players[id]["bet"]
-                while player_bet != 0 and players[id]["points"] != 0:
-                    player_bet -= 1
-                    players[id]["points"] += 1
-                    players[bank]["points"] -= 1
-        else:
-            if playerPoints > 7.5 and players[id]["bank"] == False:
-                player_bet = players[id]["bet"]
-                while player_bet != 0 and players[id]["points"] != 0:
-                    player_bet -= 1
-                    players[id]["points"] -= 1
-                    players[bank]["points"] += 1
-            else:
-                if playerPoints == 7.5 and players[id]["bank"] == False:
-                    player_bet = players[id]["bet"]*2
-                    while player_bet != 0 and players[id]["points"] != 0:
-                        player_bet -= 1
-                        players[id]["points"] += 1
-                        players[bank]["points"] -= 1
-                elif playerPoints < bankPoints and players[id]["bank"] == False:
+        if id != bank:
+            playerPoints = players[id]["roundPoints"]
+            bankPoints = players[bank]["roundPoints"]
+            if bankPoints > playerPoints:               #Si la banca tiene mas puntos que la persona
+                if bankPoints < 7.5:                    #Si tiene menos de 7.5
                     player_bet = players[id]["bet"]
                     while player_bet != 0 and players[id]["points"] != 0:
-                        player_bet -= 1                                                 
+                        player_bet -= 1
                         players[id]["points"] -= 1
                         players[bank]["points"] += 1
-                elif playerPoints > bankPoints and players[id]["bank"] == False:
+                elif bankPoints > 7.5:                  #Si tiene mas de 7.5
+                    if playerPoints < 7.5:             #Y el jugador tiene menos de 7.5
+                        player_bet = players[id]["bet"]
+                        while player_bet != 0 and players[bank]["points"] != 0:
+                            player_bet -= 1
+                            players[id]["points"] += 1
+                            players[bank]["points"] -= 1
+                    elif playerPoints == 7.5:
+                        player_bet = players[id]["bet"]*2
+                        while player_bet != 0 and players[bank]["points"] != 0:
+                            player_bet -= 1
+                            players[id]["points"] += 1
+                            players[bank]["points"] -= 1
+            #Si tienen los mismos puntos 
+            elif bankPoints == playerPoints:
+                if bankPoints <= 7.5:
+                    player_bet = players[id]["bet"]
+                    while player_bet != 0 and players[id]["points"] != 0:
+                        player_bet -= 1
+                        players[id]["points"] -= 1
+                        players[bank]["points"] += 1
+            #Si tiene menos puntos la banca que el jugador
+            elif bankPoints < playerPoints:
+                if bankPoints == 7.5:
+                    player_bet = players[id]["bet"]
+                    while player_bet != 0 and players[id]["points"] != 0:
+                        player_bet -= 1
+                        players[id]["points"] -= 1
+                        players[bank]["points"] += 1
+                elif bankPoints <= 7.5 and playerPoints > 7.6:
+                    player_bet = players[id]["bet"]
+                    while player_bet != 0 and players[id]["points"] != 0:
+                        player_bet -= 1
+                        players[id]["points"] -= 1
+                        players[bank]["points"] += 1
+                elif bankPoints < 7.5 and playerPoints < 7.5:
                     player_bet = players[id]["bet"]
                     while player_bet != 0 and players[bank]["points"] != 0:
                         player_bet -= 1
                         players[id]["points"] += 1
                         players[bank]["points"] -= 1
-    return players
+                elif playerPoints == 7.5:
+                    player_bet = players[id]["bet"]*2
+                    while player_bet != 0 and players[bank]["points"] != 0:
+                        player_bet -= 1
+                        players[id]["points"] += 1
+                        players[bank]["points"] -= 1
+    return players    
 
 def checkLosers(active_players,players_dict):
     for id in active_players:
@@ -414,57 +424,79 @@ def quitBank(players):
     for id in player_list:
         players[id]["bank"] = False
     return players
-def titulos(titulo="",extra=""):
-    if extra=="":
-        print("*" * 90)
+
+
+def setBet(points):
+    while True:
+        num = input("Set the new Bet: ")
+        if num.isnumeric():
+            num = int(num)
+            if num <= points:
+                return num
+            else:
+                print("The new Bet has to be between 1 and "+str(points))
+        else:
+            print(num+" is  not a number")
+
+def roundauto(player, cards):
+    while True:
+        if len(player["cards"]) == 0:
+            card = getCard(cards)
+            player["cards"].append(card)
+            player["roundPoints"] += cards[card]["realValue"]
+        if player["roundPoints"] < 7.5:
+            getAnotherCard = random.randint(0,100)
+            if getAnotherCard <= player["type"]:
+                card = getCard(cards)
+                player["cards"].append(card)
+                player["roundPoints"] += cards[card]["realValue"]
+                continue
+            else:
+                break
+        else:
+            break
+    return player
+
+
+def roundPlayer(player_id,cards):
+    while True:
+        opt = getOpt(textOpts="1)View Stats 2)View Game Stats 3)Set Bet 4)Order Card 5)Automatic Play 6)Stand \n",inputOptText="Option: ",rangeList=[1,2,3,4,5,6])
+        if opt == 1:
+            print("stats")
+            input()
+            clear()
+        elif opt == 2:
+            print("gameStats")
+            input()
+            clear()
+        elif opt == 3:
+            bet = setBet(player_id["points"])
+            clear()
+        elif opt == 4:
+            card = getCard(cards)
+            player_id["cards"].append(card)
+            player_id["roundPoints"] += cards[card]["realValue"]
+            print("You got "+card+"("+cards[card]["literal"]+")"+"\n Now you have "+str(player_id["roundPoints"])+"points.")
+            cards = removeCardsFromDeck(player_id, cards)
+            input()
+            clear()
+        elif opt == 5:
+            player_id = roundauto(player_id, cards)
+            break
+        elif opt == 6 and len(player_id["cards"]) >= 1:
+            break
+        else:
+            print("You need at least one card for be able to stand.")
+            input()
+            clear()
+        if player_id["roundPoints"] > 7.5:
+            break
+    return player_id
+
+def checkWinner(active_players, players):
+    if len(active_players) == 1:
+        print("{} wins with {} points!".format(players[active_players[0]]["name"], players[active_players[0]]["points"]))
     else:
-        print("*"*34+"  "+extra+"  "+"*"*34)
-    print(pyfiglet.figlet_format(titulo, justify="center"))
-    print("*" * 90 + "\n")
-
-def print_ronda(players_game_keys,players_game,players_registered):
-    cadpo = "Points: ".ljust(20)
-    cadn = "Name: ".ljust(20)
-    cadh = "Human: ".ljust(20)
-    cadp = "Priority: ".ljust(20)
-    cadt = "Type: ".ljust(20)
-    cadba = "Bank: ".ljust(20)
-    cadbe = "Bet: ".ljust(20)
-    cadc = "Cards: ".ljust(20)
-    cadr = "RoundPoints:".ljust(20)
-    for printear in players_game_keys:
-        cart = ""
-        cadn += players_registered[printear]["name"].ljust(30)
-        cadh += str(players_registered[printear]["human"]).ljust(30)
-        cadp += str(players_registered[printear]["priority"]).ljust(30)
-        cadt += str(players_registered[printear]["type"]).ljust(30)
-        cadba += str(players_registered[printear]["bank"]).ljust(30)
-        cadbe += str(players_registered[printear]["bet"]).ljust(30)
-        cadpo += str(players_game[printear]["points"]).ljust(30)
-        for j in players_registered[printear]["cards"]:
-            cart+=j+" "
-        cadc += cart.ljust(30)
-        cadr += str(players_registered[printear]["roundPoints"]).ljust(30)
-        # print("Name:"+players_registered[printear]["name"]+"\nHuman:"+str(players_registered[printear]["human"])+"\nPriority:"+str(players_registered[printear]["priority"])+"\nType:"+str(players_registered[printear]["type"])+"\nBank:"+str(players_registered[printear]["bank"])+"\nBet:"+str(players_registered[printear]["bet"])+"\nPoints: "+str(players_game[printear]["points"])+ "\nCards: "+str(players_game[printear]["cards"])+"\nrounPoints: "+str(players_game[printear]["roundPoints"]))
-    cadmaster = cadn + "\n" + cadh + "\n" + cadp + "\n" + cadt + "\n" + cadba + "\n" + cadbe + "\n" + cadpo + "\n" + cadc + "\n" + cadr + "\n"
-
-    print()
-    return cadmaster
-
-def Stats_player (active_players,players_game,players_registered,name):
-    print("*"*37+" "+"Stats of "+name+" "+"*"*37)
-    for id in active_players:
-        if players_game[id]["name"] == name:
-            print(" " * 30 + "Name".ljust(20) + players_game[id]["name"] + "\n" + " " * 30 + "Type".ljust(20) + str(
-            players_registered[id]["type"]) + "\n"
-              + " " * 30 + "Human".ljust(20) + str(players_registered[id]["human"]) + "\n"
-              + " " * 30 + "Bank".ljust(20) + str(players_registered[id]["bank"]) + "\n"
-              + " " * 30 + "Initialcard".ljust(20) + str(players_registered[id]["initialCard"]) + "\n"
-              + " " * 30 + "priority".ljust(20) + str(players_registered[id]["priority"]) + "\n"
-              + " " * 30 + "bet".ljust(20) + str(players_registered[id]["bet"]) + "\n"
-              + " " * 30 + "points".ljust(20) + str(players_registered[id]["points"]) + "\n"
-              + " " * 30 + "cards".ljust(20) + str(players_registered[id]["cards"]) + "\n"
-              + " " * 30 + "roundPoints".ljust(20) + str(players_registered[id]["roundPoints"]))
-
-
+        active_players = orderByPoints(active_players, players)
+        print("{} wins with {} points!".format(players[active_players[0]]["name"], players[active_players[0]]["points"]))
 

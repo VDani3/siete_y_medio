@@ -18,8 +18,8 @@ CREATE TABLE cardgame (
 	cardgame_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	players TINYINT NOT NULL,
     rounds TINYINT NOT NULL,
-    start_hour INT NOT NULL,
-    end_hour INT NOT NULL,
+    start_hour DATETIME NOT NULL,
+    end_hour DATETIME NOT NULL,
     deck_id CHAR(3) NOT NULL,
     FOREIGN KEY (deck_id) REFERENCES deck(deck_id)
 );
@@ -40,7 +40,7 @@ CREATE TABLE player_game_round (
     round_num INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     player_id VARCHAR(25),
     FOREIGN KEY (player_id) REFERENCES player(player_id),
-    is_blank TINYINT(1) NOT NULL,
+    is_bank TINYINT(1) NOT NULL,
     bet_points TINYINT,
     cards_value DECIMAL(4,1) NOT NULL,
     starting_round_points TINYINT,
@@ -67,9 +67,9 @@ select count(player_id) as games_played
 from player_game;
 
 CREATE VIEW minutes_played as
-select end_hour-start_hour as minutes_played
+select (TIMEDIFF(end_hour,start_hour)) as minutes_played
 from cardgame
-where cardgame_id = (select cardgame_id from player_game);
+where cardgame_id in (select cardgame_id from player_game);
 
 /*Insert Baraja española*/
 INSERT INTO deck VALUES("esp", "Spanish Deck");

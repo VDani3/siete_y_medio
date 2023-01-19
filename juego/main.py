@@ -6,7 +6,7 @@ import pyfiglet # libreria para los titulos
 import os
 
 menu00=" "*30+"1) Add/Remove/Show Players\n"+" "*30+"2) Settings\n"+" "*30+"3) Play Game\n"+" "*30+"4) Ranking\n"+" "*30+"5) Reports\n"+" "*30+"6) Exit"
-menu01=" "*30+"1)New Human Player\n"+" "*30+"2)New Boot\n"+" "*30+"3)Show/Remote Players\n"+" "*30+"4)Go back"
+menu01=" "*30+"1)New Human Player\n"+" "*30+"2)New Boot\n"+" "*30+"3)Show/Remove Players\n"+" "*30+"4)Go back"
 menu02=" "*30+"1)Set Game Players\n"+" "*30+"2)Set Card's Deck\n"+" "*30+"3)Set Max Rounds (Default 5 Rounds)\n"+" "*30+"4)Go back"
 menu03=" "*30+"1) View Stats\n"+" "*30+"2) View Game Stats\n"+" "*30+"3) Set Bet\n"+" "*30+"4) Order Card\n"+" "*30+"5) Automatic\n"+" "*30+"6) Stand"
 menu04=" "*30+"1)Players With More Earnings\n"+" "*30+"2)Players With More Games Played\n"+" "*30+"3)Players With More Minutes Played\n"+" "*30+"4)Go back"
@@ -42,7 +42,6 @@ while salir:
     while flg_00:
         clear()
         titulos("Seven And  Half Esteve Terradas i illa")                                       #
-
         opc=getOpt(menu00," "*30+"Option: ",[1,2,3,4,5,6])
         if opc==1:
             clear()
@@ -77,19 +76,20 @@ while salir:
         if opc1 == 1:
             addPlayer(players_registered)
 
+
         if opc1 == 2:
             addPlayerB(players_registered)
 
         if opc1 == 3:
             clear()
             titulos("BBDD Players")                                                                     #
-
             while True:
                 listasid=[]
-                tablaRemo(players_registered)
-                op=input(" "*20+"Option ( -id to remove players, -1 to exit ): ")
                 for id in  players_registered.keys():
                     listasid.append(id)
+                tablaRemo(players_registered,listasid)
+                op=input(" "*20+"Option ( -id to remove players, -1 to exit ): ")
+
                 if op[1:] in listasid:
                     del players_registered[op[1:]]
                 elif op=="-1":
@@ -108,6 +108,8 @@ while salir:
         opc2=getOpt(menu02," "*30+"Option: ",rangeList=[1,2,3,4])
         if opc2==1:
             clear()
+            listaj=[]
+            op=""
             titulos("Settings")
             print("*"*20 + "Actuals Players In Game"+"*"*20)
             if len(listajugadores)==0:
@@ -116,44 +118,53 @@ while salir:
             else:
                 for i in listajugadores:
                     print(i, players_registered[i]["name"], players_registered[i]["human"], players_registered[i]["type"])
-                    input("Press enter to continue")
+                input("Press enter to continue")
             while True:
                 clear()
-                titulos("Settings")                                                                     #
-                tablaRemo(players_registered)
+                titulos("Settings")
+                for key in players_registered:
+                    if key not in listaj and key not in listajugadores:
+                        listaj.append(key)
+                if len(listajugadores) >= 6:
+                    print("*"*20 + "You have the maximum players"+"*"*20 )
+                    input("Press enter to continue")
+                    break
+                tablaRemo(players_registered,listaj)
                 op = input("Option ( id to add to play,-id to remove players,sh to show actual players in the game, -1 to go back ): ")
                 listasid = []
                 for id in players_registered.keys():
                     listasid.append(id)
-                if op in listasid and op not in listajugadores:
+                if op in listasid and op not in listajugadores and len(listajugadores)<=6:
+
                     listajugadores.append(op)
+                    listaj.remove(op)
                     print("*" * 20 + "Actuals Players In Game" + "*" * 20)
+                    print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human", "Typed"))
+                    print("*" * 80)
                     for j in listajugadores:
-                        print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human","Typed"))
-                        print("*"*80)
 
                         print("{:<10} {:<10} {:<10} {:<10}  ".format(j, players_registered[j]["name"], players_registered[j]["human"], players_registered[j]["type"]))
-                        input("Press enter to continue")
+                    input("Press enter to continue")
                 elif op[1:] in listasid and op[0]=="-":
                     listajugadores.remove(op[1:])
                     print("*" * 20 + "Actuals Players In Game" + "*" * 20)
                     if len(listajugadores) > 0:
+                        print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human", "Typed"))
+                        print("*" * 80)
                         for i in listajugadores:
-                            print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human","Typed"))
-                            print("*" * 80)
                             print("{:<10} {:<10} {:<10} {:<10}  ".format(i, players_registered[i]["name"], players_registered[i]["human"], players_registered[i]["type"]))
-                            input("Press enter to continue")
+                        input("Press enter to continue")
                     else:
                         print("*" * 20 + "Actuals Players In Game" + "*" * 20)
                         print("There is no players in game")
                         input("Press enter to continue")
                 elif op=="sh":
                     if len(listajugadores)>0:
+                        print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human", "Typed"))
+                        print("*" * 80)
                         for i in listajugadores:
-                            print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human", "Typed"))
-                            print("*" * 80)
                             print("{:<10} {:<10} {:<10} {:<10}  ".format(i, players_registered[i]["name"], players_registered[i]["human"], players_registered[i]["type"]))
-                            input("Press enter to continue")
+                        input("Press enter to continue")
                     else:
                         print("*"*20 + "Actuals Players In Game"+"*"*20)
                         print("There is no players in game")
@@ -161,10 +172,10 @@ while salir:
 
                 elif op=="-1":
                     break
+
                 else:
                     print("=" * 50 + "Invalid option" + "=" * 50)
                     input("Press enter to continue")
-
             print()
         if opc2==2:
             clear()
@@ -182,9 +193,13 @@ while salir:
                 carta = "POK"
             clear()
         if opc2==3:
-            clear()
-            titulos("Settings")                                                                         #
-            rounds=input("Max Rounds: ")
+            while True:
+                clear()
+                titulos("Settings")
+                print("Maximum 30")#
+                rounds=input("Max Rounds: ")
+                if int(rounds)<=30:
+                    break
             print("Established maxim of rounds to: ",rounds)
             input("Enter to continue")
             clear()
@@ -192,10 +207,9 @@ while salir:
             flg_00 = True
             flg_02 = False
 
-
     while flg_03:
         #Temp
-        listajugadores = ["11115555A","49883035Z","49883035D"]
+
         #Checkear que ni la baraja ni la lista de jugadores esten vacios
         mal = CheckNotEmpty("Has de elegir una baraja","No hay jugadores seleccionados",carta, listajugadores)
         if mal:
@@ -209,7 +223,7 @@ while salir:
         players_game = setGamePriority(list(players_game.keys()), cartas, players_game)         #Orden inicial de los jugadores, setear la banca
         players_game_keys = list(players_game.keys())
         active_players = ordenarPlayers(players_game) 
-        while roundgame < rounds and len(active_players) > 1:
+        while roundgame < int(rounds) and len(active_players) > 1:
             bank = bankCheck(players_game)
             clear()
             titulos("Seven And Half")
@@ -240,7 +254,7 @@ while salir:
                     print(print_ronda(players_game_keys, players_game, players_registered))                 #
                     input(" "*50+"Enter to continue\n")                                                     #
                 elif players_game[banca]["human"] == True and players_game[banca]["bank"] == True and passed == False:      #Si es humano y Banca
-                    print("hola")
+
                     players_game[banca] = roundPlayer(players_game[banca],avaliable_cards,players_game,roundgame,active_players,name,banca,players_game_keys, menu3h)
                     avaliable_cards = removeCardsFromDeck(players_game[banca],avaliable_cards)
                     passed = True

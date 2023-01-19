@@ -38,7 +38,7 @@ def new_nif(dict={}):
                 raise ValueError ("El NIF no te un format adequat (8 números i una lletra)")
             if letrasDni[int(dni[:8]) % 23] == dni[8].lower(): # comprova que la lletra es correcte
                 raise ValueError("El NIF no te la lletra correcta")
-            if dni in lista:
+            if dni.upper() in lista:
                 raise ValueError("El NIF ya esta en us")
             else:
                 return dni.upper()
@@ -82,16 +82,19 @@ def addPlayer(dict={}):
     print(" "*30+"DNI: ", nif)
     if opcrie==1:
         rie=50
+        bet = 5
         print(" "*30+"Profile: Cautious")
     if opcrie == 2:
         rie = 40
+        bet = 4
         print(" "*30+"Profile: Moderated")
     if opcrie == 3:
         rie = 30
+        bet = 3
         print(" "*30+"Profile: Bold")
     op=input(" "*30+"Is ok ? Y/n:n")
     if op == "Y" or op == "y":
-        dict[nif] = {"name": nombre, "human": True, "bank": False, "initialCard": "", "type": rie, "bet": 0,
+        dict[nif] = {"name": nombre, "human": True, "bank": False, "initialCard": "", "type": rie, "bet": bet,
                        "points": 0, "cards": [], "roundPoints": 0}
         return dict
     if op == "n"or op == "N":
@@ -120,16 +123,19 @@ def addPlayerB(dict={}):
     print(" "*30+"DNI: ", nif)
     if opcrie == 1:
         rie = 50
+        bet=5
         print(" "*30+"Profile: Cautious")
     if opcrie == 2:
         rie = 40
+        bet=4
         print(" "*30+"Profile: Moderated")
     if opcrie == 3:
         rie = 30
+        bet=3
         print(" "*30+"Profile: Bold")
     op = input(" "*30+"Is ok ? Y/n:n")
     if op == "Y" or op == "y":
-        dict[nif] = {"name": nombre, "human": False, "bank": False, "initialCard": "", "type": rie, "bet": 0,
+        dict[nif] = {"name": nombre, "human": False, "bank": False, "initialCard": "", "type": rie, "bet": bet,
                        "points": 0, "cards": [], "roundPoints": 0}
         return dict
     if op == "n"or op == "N":
@@ -142,14 +148,15 @@ def ordenar(lista):
                 lista[i], lista[i + 1] = lista[i + 1], lista[i]
     return lista
 
-def tablaRemo(dict={}):
+def tablaRemo(dict={},lista=[]):
     listaidh=[]
     listanamh=[]
     listatyh=[]
     listaidb=[]
     listanamb=[]
     listatyb=[]
-    for key in dict.keys():
+
+    for key in lista:
         if dict[key]["human"] == True:
             listaidh.append(key)
             listaidh=ordenar(listaidh)
@@ -257,7 +264,6 @@ def setPlayers(ids,players = {}):
     return result
 
 def setCards(cards):
-    print(cards)
     resultados = {}
     cards_list = list(cards.keys())
     for id in cards_list:

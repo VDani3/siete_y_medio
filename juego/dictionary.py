@@ -2,7 +2,11 @@
 players_registered = { "11115555A":{ "name":"Mario" ,"human":False,"bank" :False,"initialCard" :"" ,"priority":0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
             "22225555A":{ "name":"Pedro" ,"human":True,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
             "49883035Z":{ "name":"Alex" ,"human":True,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
-            "49883035D":{ "name":"Pepito" ,"human":False,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0}
+            "49883035D":{ "name":"Pepito" ,"human":False,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
+            "49883035J":{ "name":"Pepito" ,"human":False,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
+            "49883035H":{ "name":"Pepito" ,"human":False,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
+            "49883035L":{ "name":"Pepito" ,"human":False,"bank" :False,"initialCard" :"" ,"priority" :0,"type" :40,"bet" :4,"points" :0,"cards" :[],"roundPoints" :0},
+
 }
 
 #value como valor de la carta (del dibujito) y relValue como valor en el juego

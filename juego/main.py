@@ -41,8 +41,8 @@ cartas = esp
 while salir:
     while flg_00:
         clear()
-        titulos("Seven And  Half Esteve Terradas i illa")                                       #
-        opc=getOpt(menu00," "*30+"Option: ",[1,2,3,4,5,6])
+        titulos("Seven And  Half Esteve Terradas i illa")                                       
+        opc=getOpt(menu00," "*30+"Option: ",[1,2,3,4,5,6], "Seven And  Half Esteve Terradas i illa")
         if opc==1:
             clear()
             flg_00 = False
@@ -71,25 +71,21 @@ while salir:
 
     while flg_01:
         clear()
-        titulos("BBDD Players")                                                                         #
-        opc1 = getOpt(menu01, " "*30+"Option: ", [1, 2, 3, 4])
+        titulos("BBDD Players")                                                                         
+        opc1 = getOpt(menu01, " "*30+"Option: ", [1, 2, 3, 4],"BBDD Players")
         if opc1 == 1:
             addPlayer(players_registered)
-
-
         if opc1 == 2:
             addPlayerB(players_registered)
-
         if opc1 == 3:
             clear()
-            titulos("BBDD Players")                                                                     #
+            titulos("BBDD Players")                                                                     
             while True:
                 listasid=[]
                 for id in  players_registered.keys():
                     listasid.append(id)
                 tablaRemo(players_registered,listasid)
-                op=input(" "*20+"Option ( -id to remove players, -1 to exit ): ")
-
+                op=input(" "*20+"Option (-id to remove players, -1 to exit ): ")
                 if op[1:] in listasid:
                     del players_registered[op[1:]]
                 elif op=="-1":
@@ -104,8 +100,8 @@ while salir:
 
     while flg_02:
         clear()
-        titulos("Settings")                                                                             #
-        opc2=getOpt(menu02," "*30+"Option: ",rangeList=[1,2,3,4])
+        titulos("Settings")                                                                             
+        opc2=getOpt(menu02," "*30+"Option: ",[1,2,3,4],"Settings")
         if opc2==1:
             clear()
             listaj=[]
@@ -135,14 +131,12 @@ while salir:
                 for id in players_registered.keys():
                     listasid.append(id)
                 if op in listasid and op not in listajugadores and len(listajugadores)<=6:
-
                     listajugadores.append(op)
                     listaj.remove(op)
                     print("*" * 20 + "Actuals Players In Game" + "*" * 20)
                     print("{:<10} {:<10} {:<10} {:<10}  ".format("Player ID", "Name", "Human", "Typed"))
                     print("*" * 80)
                     for j in listajugadores:
-
                         print("{:<10} {:<10} {:<10} {:<10}  ".format(j, players_registered[j]["name"], players_registered[j]["human"], players_registered[j]["type"]))
                     input("Press enter to continue")
                 elif op[1:] in listasid and op[0]=="-":
@@ -169,18 +163,16 @@ while salir:
                         print("*"*20 + "Actuals Players In Game"+"*"*20)
                         print("There is no players in game")
                         input("Press enter to continue")
-
                 elif op=="-1":
                     break
-
                 else:
                     print("=" * 50 + "Invalid option" + "=" * 50)
                     input("Press enter to continue")
             print()
         if opc2==2:
             clear()
-            titulos("Settings")                                                                         #
-            cartas = getOpt(menu22, " "*30+"Option: ", rangeList=[1, 2, 0])
+            titulos("Settings")                                                                         
+            cartas = getOpt(menu22, " "*30+"Option: ", [1, 2, 0], "Settings")
             if cartas==1:
                 print("Established Card Deck ESP, Baraja Española\n")
                 input("Enter to continue")
@@ -208,8 +200,6 @@ while salir:
             flg_02 = False
 
     while flg_03:
-        #Temp
-
         #Checkear que ni la baraja ni la lista de jugadores esten vacios
         mal = CheckNotEmpty("Has de elegir una baraja","No hay jugadores seleccionados",carta, listajugadores)
         if mal:
@@ -227,7 +217,7 @@ while salir:
             bank = bankCheck(players_game)
             clear()
             titulos("Seven And Half")
-            passed = False
+            passed = [False,False,False,False,False,False]
             active_players = ordenarPlayers(players_game)                                          #Lista de jugadores activos con puntos ordenada
             players_game = resetCardsAndPoints(players_game)                                       #Resetear puntos de la ronda y las cartas de cada jugador
             avaliable_cards = setCards(cartas)                                                               #Resetear las cartas disponibles
@@ -241,30 +231,28 @@ while salir:
                     print( "Round "+str(roundgame) +" Turn of "+players_game[id]["name"])
                     print(print_ronda(players_game_keys, players_game, players_registered))# printa las estats de la ronda de LOS PLAYERS
                     input(" "*50+"Enter to continue\n")
-                elif players_game[id]["human"] == True and players_game[id]["bank"] == False and passed == False:      #Si es humano
+                elif players_game[id]["human"] == True and players_game[id]["bank"] == False and passed[active_players.index(id)] == False:      #Si es humano
                     players_game[id] = roundPlayer(players_game[id],avaliable_cards,players_game,roundgame,active_players,name,bank,players_game_keys,menu3h)
                     avaliable_cards = removeCardsFromDeck(players_game[id],avaliable_cards)
-                    passed = True
+                    passed[active_players.index(id)] = True
             for banca in active_players:
                 if players_game[banca]["human"] == False and players_game[banca]["bank"] == True:   #Si es bot y Banca
                     players_game[banca] = roundBankBot(players_game[banca],avaliable_cards,players_game,banca)
-                    clear()                                                                                 #
-                    titulos("Seven And Half")                                                               #
+                    clear()                                                                                 
+                    titulos("Seven And Half")                                                               
                     print(" "*30+"Round " + str(roundgame) + " Turn of " + players_game[banca]["name"])     # printa las estats de la ronda de LA BANCA
-                    print(print_ronda(players_game_keys, players_game, players_registered))                 #
-                    input(" "*50+"Enter to continue\n")                                                     #
-                elif players_game[banca]["human"] == True and players_game[banca]["bank"] == True and passed == False:      #Si es humano y Banca
-
+                    print(print_ronda(players_game_keys, players_game, players_registered))                 
+                    input(" "*50+"Enter to continue\n")                                                     
+                elif players_game[banca]["human"] == True and players_game[banca]["bank"] == True and passed[active_players.index(id)] == False:      #Si es humano y Banca
                     players_game[banca] = roundPlayer(players_game[banca],avaliable_cards,players_game,roundgame,active_players,name,banca,players_game_keys, menu3h)
                     avaliable_cards = removeCardsFromDeck(players_game[banca],avaliable_cards)
-                    passed = True
+                    passed[active_players.index(banca)] = True
             players_game = pointsGiving(active_players,players_game, bank)
             active_players = checkLosers(active_players,players_game)
             players_game = checkChangeBank(active_players,players_game,bank)
-            #printear
             clear()
-            titulos("Seven And Half","STATS AFTER ROUND "+str(roundgame))                                   #
-            print(print_ronda(players_game_keys, players_game, players_registered))                         #
+            titulos("Seven And Half","STATS AFTER ROUND "+str(roundgame))                                   
+            print(print_ronda(players_game_keys, players_game, players_registered))                         
             roundgame += 1
             exitj = input(" " * 30 + "Enter to continue to new Round, exit to leave game: ")
             if exitj == "exit":
@@ -278,8 +266,8 @@ while salir:
         clear()
     while flg_04 :
        clear()
-       titulos("Ranking")                                                                                #
-       opc4 = getOpt(menu04, " "*30+"Option:", rangeList=[1, 2, 3,4])
+       titulos("Ranking")                                                                                
+       opc4 = getOpt(menu04, " "*30+"Option:", [1, 2, 3,4], "Ranking")
        if opc4==1:
            print()
            print("*" * 75)
@@ -306,8 +294,8 @@ while salir:
            flg_04 = False  
     while flg_05:
         clear()
-        titulos("Reports")                                                                              #
-        opc5 = getOpt(menu05, " "*30+"Option:", rangeList=[1, 2, 3,4,5,6,7,8,9,10,11])
+        titulos("Reports")                                                                              
+        opc5 = getOpt(menu05, " "*30+"Option:", [1,2,3,4,5,6,7,8,9,10,11],"Reports")
         if opc5==11:
             flg_00 = True
             flg_05 = False

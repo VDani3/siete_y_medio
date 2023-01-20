@@ -10,7 +10,7 @@ def clear():
     else:
         os.system("clear")
         
-def getOpt(textOpts="",inputOptText="",rangeList=[]):
+def getOpt(textOpts="",inputOptText="",rangeList=[], titulo = "", additional = ""):
     while True:
         try:
             print(textOpts)
@@ -20,10 +20,12 @@ def getOpt(textOpts="",inputOptText="",rangeList=[]):
             else:
                 raise ValueError("El valor introduit no es correcte")
         except ValueError as e:
-            print()
             print(e)
             input()
             clear()
+            titulos(titulo)
+            if additional != "":
+                print(additional)
 
 def new_nif(dict={}):
     while True:
@@ -75,7 +77,7 @@ def addPlayer(dict={}):
     print(" "*30+"DNI: ", nif)
     menurie=" "*30+"1) Cautious»\n"+" "*30+"2) Moderated\n"+" "*30+"3) Bold"
     print(" "*30+"Select Profile For The New Boot:\n")
-    opcrie=getOpt(menurie,"Option: ",[1, 2, 3])
+    opcrie=getOpt(menurie,"Option: ",[1, 2, 3],"BDD Players")
     clear()
     titulos("BBDD Players")
     print(" "*30+"Name: ", nombre)
@@ -116,7 +118,7 @@ def addPlayerB(dict={}):
     print(" "*30+"DNI: ", nif)
     print(" "*30+"Select Profile For The New Boot:\n")
     menurie = " "*30+"1) Cautious»\n"+" "*30+"2) Moderated\n"+" "*30+"3) Bold"
-    opcrie = getOpt(menurie, "Option: ", [1, 2, 3])
+    opcrie = getOpt(menurie, "Option: ", [1, 2, 3],"BBDD Players")
     clear()
     titulos("BBDD Players")
     print(" "*30+"Name: ", nombre)
@@ -223,7 +225,7 @@ def setGamePriority(players, baraja, player_dict):
         cartas.append(barajac[random.randint(0,len(barajac)-1)])
     for pasada in range(0,len(players)-1):    
         for i in range(0,len(players)-pasada-1):
-            if baraja[cartas[i]]["value"] > baraja[cartas[i+1]]["value"] or (baraja[cartas[i]]["value"] > baraja[cartas[i+1]]["value"] and baraja[cartas[i]]["priority"] > baraja[cartas[i+1]]["priority"]):
+            if baraja[cartas[i]]["value"] < baraja[cartas[i+1]]["value"] or (baraja[cartas[i]]["value"] < baraja[cartas[i+1]]["value"] and baraja[cartas[i]]["priority"] < baraja[cartas[i+1]]["priority"]):
                 cartas[i], cartas[i+1] = cartas[i+1], cartas[i]
                 players[i], players[i+1] = players[i+1], players[i]
     priority = []
@@ -240,9 +242,11 @@ def setGamePriority(players, baraja, player_dict):
 
 def ordenarPlayers(player_dict):
     players = list(player_dict.keys())
+    res = []
     for id in players:
-        if player_dict[id]["points"] <= 0:
-            players = players.remove[id]
+        if player_dict[id]["points"] > 0:
+            res.append(id)
+    players = res
     for pasada in range(0,len(players)-1):    
         for i in range(0,len(players)-pasada-1):
             if player_dict[players[i]]["priority"] > player_dict[players[i+1]]["priority"]:
@@ -359,19 +363,47 @@ def removeCardsFromDeck(player,avaliable_cards):
     return result
 
 def pointsGiving(activePlayers,players_dict, bank):
+    activePlayers = ordenar(activePlayers)
     players = players_dict
+    #Banca gana puntos primero
     for id in activePlayers:
-        if id != bank:
-            playerPoints = players[id]["roundPoints"]
-            bankPoints = players[bank]["roundPoints"]
-            if bankPoints > playerPoints:               #Si la banca tiene mas puntos que la persona
-                if bankPoints < 7.5:                    #Si tiene menos de 7.5
+        playerPoints = players[id]["roundPoints"]
+        bankPoints = players[bank]["roundPoints"]
+        if bankPoints > playerPoints:               #Si la banca tiene mas puntos que la persona
+            if bankPoints < 7.5:                    #Si tiene menos de 7.5
+                player_bet = players[id]["bet"]
+                while player_bet != 0 and players[id]["points"] != 0:
+                    player_bet -= 1
+                    players[id]["points"] -= 1
+                    players[bank]["points"] += 1
+                    #Si tienen los mismos puntos 
+        elif bankPoints == playerPoints:
+            if bankPoints <= 7.5:
+                player_bet = players[id]["bet"]
+                while player_bet != 0 and players[id]["points"] != 0:
+                    player_bet -= 1
+                    players[id]["points"] -= 1
+                    players[bank]["points"] += 1
+        elif bankPoints < playerPoints:
+                if bankPoints == 7.5:
                     player_bet = players[id]["bet"]
                     while player_bet != 0 and players[id]["points"] != 0:
                         player_bet -= 1
                         players[id]["points"] -= 1
                         players[bank]["points"] += 1
-                elif bankPoints > 7.5:                  #Si tiene mas de 7.5
+                elif bankPoints <= 7.5 and playerPoints > 7.5:
+                    player_bet = players[id]["bet"]
+                    while player_bet != 0 and players[id]["points"] != 0:
+                        player_bet -= 1
+                        players[id]["points"] -= 1
+                        players[bank]["points"] += 1
+    #Banca reparte despues
+    for id in activePlayers:
+        if id != bank:
+            playerPoints = players[id]["roundPoints"]
+            bankPoints = players[bank]["roundPoints"]
+            if bankPoints > playerPoints:               #Si la banca tiene mas puntos que la persona
+                if bankPoints > 7.5:                  #Si tiene mas de 7.5
                     if playerPoints < 7.5:             #Y el jugador tiene menos de 7.5
                         player_bet = players[id]["bet"]
                         while player_bet != 0 and players[bank]["points"] != 0:
@@ -384,29 +416,9 @@ def pointsGiving(activePlayers,players_dict, bank):
                             player_bet -= 1
                             players[id]["points"] += 1
                             players[bank]["points"] -= 1
-            #Si tienen los mismos puntos 
-            elif bankPoints == playerPoints:
-                if bankPoints <= 7.5:
-                    player_bet = players[id]["bet"]
-                    while player_bet != 0 and players[id]["points"] != 0:
-                        player_bet -= 1
-                        players[id]["points"] -= 1
-                        players[bank]["points"] += 1
             #Si tiene menos puntos la banca que el jugador
             elif bankPoints < playerPoints:
-                if bankPoints == 7.5:
-                    player_bet = players[id]["bet"]
-                    while player_bet != 0 and players[id]["points"] != 0:
-                        player_bet -= 1
-                        players[id]["points"] -= 1
-                        players[bank]["points"] += 1
-                elif bankPoints <= 7.5 and playerPoints > 7.6:
-                    player_bet = players[id]["bet"]
-                    while player_bet != 0 and players[id]["points"] != 0:
-                        player_bet -= 1
-                        players[id]["points"] -= 1
-                        players[bank]["points"] += 1
-                elif bankPoints < 7.5 and playerPoints < 7.5:
+                if bankPoints < 7.5 and playerPoints < 7.5:
                     player_bet = players[id]["bet"]
                     while player_bet != 0 and players[bank]["points"] != 0:
                         player_bet -= 1
@@ -451,7 +463,6 @@ def quitBank(players):
         players[id]["bank"] = False
     return players
 
-
 def setBet(points):
     while True:
         num = input("Set the new Bet: ")
@@ -485,25 +496,25 @@ def roundauto(player, cards):
 
 def roundPlayer(player_id,cards,players_game,roundgame,active_players,name,banca,players_game_keys, menu3h):
     while True:
-        clear()                                                                                 #
-        titulos("Seven And Half")                                                               #
-        print( "Round "+str(roundgame) +" Turn of "+player_id["name"])                   #
-        opt = getOpt(menu3h, " " * 30 + "Option: ", [1, 2, 3, 4, 5, 6])
+        clear()                                                                                 
+        titulos("Seven And Half")                                                               
+        print("Round "+str(roundgame) +" Turn of "+player_id["name"])                   
+        opt = getOpt(menu3h, " " * 30 + "Option: ", [1, 2, 3, 4, 5, 6],"Seven And Half","Round "+str(roundgame) +" Turn of "+player_id["name"])
         if opt == 1:
-            clear()                                                                             #
-            titulos("Seven And Half")                                                           #
+            clear()                                                                             
+            titulos("Seven And Half")                                                           
             Stats_player(active_players, players_game, players_registered,name)  # printa las Stats idividuales
             input()
             clear()
         elif opt == 2:
-            clear()                                                                             #
-            titulos("Seven And Half")                                                           #
-            print(" " * 30 + "Round " + str(roundgame) + " Turn of " + players_game[banca]["name"])                                                                        # printa las estats de la ronda de LA BANCA
-            print(print_ronda(players_game_keys, players_game, players_registered))             #
+            clear()                                                                             
+            titulos("Seven And Half")                                                           
+            print(" " * 30 + "Round " + str(roundgame) + " Turn of " + players_game[banca]["name"])      # printa las estats de la ronda de LA BANCA
+            print(print_ronda(players_game_keys, players_game, players_registered))             
             input(" " * 50 + "Enter to continue\n") 
             clear()
         elif opt == 3:
-            bet = setBet(player_id["points"])
+            player_id["bet"] = setBet(player_id["points"])
             clear()
         elif opt == 4:
             card = getCard(cards)
@@ -527,15 +538,17 @@ def roundPlayer(player_id,cards,players_game,roundgame,active_players,name,banca
     return player_id
 
 def checkWinner(active_players, players,roundgame):
+    titulos("Game Over")
     if len(active_players) == 1:
         print(" "*15+"The winner is : "+str(active_players[0])+" - "
               + str(players_registered[active_players[0]]["name"]) + " in "
               +str(roundgame-1)+" rounds, whith "
-              +str(players_registered[active_players[0]]["points"])+" points")                              #
+              +str(players_registered[active_players[0]]["points"])+" points")                              
         input(" "*30+"Enter to continue")
     else:
         active_players = orderByPoints(active_players, players)
         print("{} wins with {} points!".format(players[active_players[0]]["name"], players[active_players[0]]["points"]))
+        
 
 def titulos(titulo="",extra=""):
     if extra=="":

@@ -20,16 +20,16 @@
 }
 
 body{
-    margin: 0;
-    padding: 0;
-    font-family: "Fredoka";
-    background-image: url("./Images/backgrounds/background3.jpg");
-    -webkit-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
-    box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
-    color: white;
-    font-size: 1em;
-    width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Fredoka";
+  background-image: url("./Images/backgrounds/background3.jpg");
+  -webkit-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  color: white;
+  font-size: 1em;
+  width: 100%;
 }
 
 .autocenter { 

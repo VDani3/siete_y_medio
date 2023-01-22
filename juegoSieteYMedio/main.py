@@ -255,7 +255,7 @@ while salir:
                     players_game[banca] = roundPlayer(players_game[banca],avaliable_cards,players_game,roundgame,active_players,name,banca,players_game_keys, menu3h)
                     avaliable_cards = removeCardsFromDeck(players_game[banca],avaliable_cards)
                     passed[active_players.index(banca)] = True
-            gamePlayerInfoID = collectStarterGamePlayerInfo(active_players,players_game, cardgameID)
+            gamePlayerInfoID = collectStarterGamePlayerInfo(active_players,players_game, cardgameID, roundgame)
             roundInfoID = collectRoundInfo1(active_players,players_game, roundgame, cardgameID)
             players_game = pointsGiving(active_players,players_game, bank)
             collectRoundInfo2(active_players,players_game,roundInfoID)

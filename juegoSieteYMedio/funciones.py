@@ -673,7 +673,7 @@ def collectEndGameInfo(id, roundNum):
     conexion.commit()
 
 # player_game BD
-def generateGamePlayerID():
+def generateGamePlayerID(lastID):
     if gamePlayerInfo != "":
         for id in gamePlayerInfo:
             lastID = int(str(id)[0])
@@ -682,8 +682,8 @@ def generateGamePlayerID():
         lastID = 1
     return lastID
 
-def collectStarterGamePlayerInfo(active_players,players_game,cardgameID):
-    id = generateGamePlayerID()
+def collectStarterGamePlayerInfo(active_players,players_game,cardgameID,roundgame):
+    id = generateGamePlayerID(roundgame)
     idplayer = active_players[0]
     player = players_game[idplayer]
     gamePlayerInfo[id] = {idplayer:{"cardgameID":cardgameID, "initialCard":player["initialCard"], "startingPoints":20, "endingPoints":0}}
@@ -699,19 +699,20 @@ def collectEndGamePlayerInfo(active_players,players_game,id):
 
 def sendGamePlayerInfo_db(gamePlayerInfoID,active_players):
     gamePlayer = gamePlayerInfo[gamePlayerInfoID]
+    car = "B01"
     for idplayer in active_players:
-        cursor.execute('insert into player_game values ('+str(gamePlayer[idplayer]["cardgameID"])+',"'+idplayer+'","'+gamePlayer[idplayer]["initialCard"]+'",'+str(gamePlayer[idplayer]["startingPoints"])+','+str(gamePlayer[idplayer]["endingPoints"])+')')
+        cursor.execute('insert into player_game values ('+str(gamePlayer[idplayer]["cardgameID"])+',"'+idplayer+'","'+car+'",'+str(gamePlayer[idplayer]["startingPoints"])+','+str(gamePlayer[idplayer]["endingPoints"])+')')
     conexion.commit()
 
 # player_game BD
-def generateRoundInfoID():
+def generateRoundInfoID(lastID):
     for id in roundInfo:
         lastID = int(str(id)[0])
     lastID = lastID+1
     return lastID
 
 def collectRoundInfo1(active_players,players_game,roundID,cardgameID):
-    id = generateRoundInfoID()
+    id = generateRoundInfoID(roundID)
     idplayer = active_players[0]
     player = players_game[idplayer]
     if player["bank"]:

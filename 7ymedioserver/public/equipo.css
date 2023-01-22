@@ -1,0 +1,236 @@
+/*Fuentes*/
+@font-face {
+  font-family: "CasinoFlat";
+  src: url('./CasinoFlatShadow.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url('./Fredoka-Medium.ttf') format('truetype');
+}
+  
+@font-face {
+  font-family: "Fredoka One";
+  src: url('./FredokaOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Kalmansk";
+  src: url('./Kalmansk-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: "EvilEmpire";
+  src: url('./EvilEmpire.otf') format('truetype');
+}
+
+#back{
+  background-image: url("./Images/backgrounds/background1.png");
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Fredoka";
+  background-image: url("./Images/backgrounds/background1.png");
+  -webkit-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  color: white;
+  font-size: 1em;
+  width: 100%;
+}
+
+.sticky{
+  max-width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.stickyb{
+  max-width: 100%;
+}
+
+.persona, .persona2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  min-height: 500px;
+}
+
+.persona2{
+  flex-direction: row-reverse;
+}
+
+.titulo{
+  font-family: "CasinoFlat";
+  text-align: center;
+  font-size: 80px;
+  letter-spacing: 0;
+  display: block;
+  margin: 40px 0 5px 0;
+  text-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+  background: url("./Images/backgrounds/text2.png") repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+    /*Animar el fondo*/
+  -webkit-text-fill-color: transparent;
+  animation: fondo 80s linear infinite;
+    /*Activar la aceleracion de harware para mejor animacion*/
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+    /*Hacer borde*/
+  -webkit-text-stroke: 3px rgb(255, 255, 255);
+}
+
+p{
+  margin-top: 0;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  text-align: center;
+}
+
+#uno{
+  font-size: 1.5em;
+}
+
+.barra{
+  margin-top: 20px;
+  height: 100px;
+  width: 100%;
+  background-image: url("./Images/backgrounds/barra_blanca.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*Cuadros de la gente*/
+.foto, .foto2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.foto img{
+  max-width: 60%;
+  transform: scale3d(1, 1, 1) rotate(-10deg);
+  transition: transform 0.5s cubic-bezier(.47,1.64,.41,.8);
+  
+}
+
+.foto2 img{
+  max-width: 60%;
+  transform: scale3d(1, 1, 1) rotate(10deg);
+  transition: transform 0.5s cubic-bezier(.47,1.64,.41,.8);
+}
+
+.foto img:hover, .foto2 img:hover{
+  transform: scale3d(1.2, 1.2, 1.2);
+}
+
+.info{
+  box-sizing: border-box;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  text-align: center;
+}
+
+.dani, .joel, .alex{
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+  -webkit-text-stroke: 2px rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+
+.dani{
+  font-family: "EvilEmpire";
+  color: rgb(124, 165, 255);
+}
+
+.joel{
+  font-family: "Kalmansk";
+  font-size: 75px;
+  color: rgb(255, 163, 24);
+}
+
+.alex{
+  font-family: "Fredoka One";
+  color: rgb(228, 0, 133);
+}
+
+.redes{
+  display: flex;
+  justify-content: center;
+}
+
+.redes img{
+  max-width: 40px;
+  transform: scale3d(1, 1, 1);
+  transition: transform 0.5s cubic-bezier(.47,1.64,.41,.8);
+}
+
+.redes img:hover{
+  transform: scale3d(1.3, 1.3, 1.3);
+}
+
+th, td{
+  padding: 5px;
+  padding-right: 10px;
+}
+
+
+/*Animaciones*/
+@keyframes fondo {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/*Solo PC*/
+@media only screen and (min-width: 768px) {
+  .stickyb{
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0px;
+    z-index: -5;
+  }
+}
+/*Movil*/
+@media only screen and (max-width: 768px) {
+  .persona, .persona2{
+    overflow: hidden;
+    flex-direction: column;
+  }
+  .foto{
+    width: 100%;
+    transform: scale3d(1, 1, 1) rotate(10deg);
+  }
+  .foto2{
+    width: 100%;
+    transform: scale3d(1, 1, 1) rotate(-10deg);
+  }
+  .info{
+    padding-top: 0;
+    width: 100%;
+  }
+  .dani{
+    margin-top: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+

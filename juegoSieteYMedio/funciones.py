@@ -211,7 +211,7 @@ def tablaRemo(dict={},lista=[]):
 #Apartado de 3)Play Game
 def CheckNotEmpty(msj1, msj2, *par):
     for i in par:
-        if len(i) < 0:
+        if len(i) < 2:
             if type(i) == str and len(i) == 0:
                 print(msj1)
             elif type(i) == list:

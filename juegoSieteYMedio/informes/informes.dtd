@@ -1,0 +1,39 @@
+<!ELEMENT informes (informe2*, informe3*, informe5*, informe7*, informe8*, informe9*, informe10*)>
+
+<!-- infromes -->
+<!ELEMENT informe2 (cardgame_id, player_id, max_bet_points)>
+<!ATTLIST informe2 id ID #REQUIRED>
+
+<!ELEMENT informe3 (cardgame_id, player_id, min_bet_points)>
+<!ATTLIST informe3 id ID #REQUIRED>
+
+<!ELEMENT informe5 (cardgame_id, player_id, max_win_points)>
+<!ATTLIST informe5 id ID #REQUIRED>
+
+<!ELEMENT informe7 (cardgame_id, amount_player)>
+<!ATTLIST informe7 id ID #REQUIRED>
+
+<!ELEMENT informe8 (cardgame_id, avg_bet_points)>
+<!ATTLIST informe8 id ID #REQUIRED>
+
+<!ELEMENT informe9 (cardgame_id, avg_round1_bet_points)>
+<!ATTLIST informe9 id ID #REQUIRED>
+
+<!ELEMENT informe10 (cardgame_id, avg_last_round_bet_points)>
+<!ATTLIST informe10 id ID #REQUIRED>
+
+<!-- attributos -->
+<!ELEMENT cardgame_id (#PCDATA)>
+<!ELEMENT player_id (#PCDATA)>
+
+<!ELEMENT max_bet_points (#PCDATA)>
+
+<!ELEMENT min_bet_points (#PCDATA)>
+
+<!ELEMENT max_win_points (#PCDATA)>
+
+<!ELEMENT amount_player (#PCDATA)>
+
+<!ELEMENT avg_round1_bet_points (#PCDATA)>
+
+<!ELEMENT avg_last_round_bet_points (#PCDATA)>

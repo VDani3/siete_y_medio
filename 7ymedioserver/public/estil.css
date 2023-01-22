@@ -1,15 +1,39 @@
+/*Fuentes*/
+@font-face {
+    font-family: "CasinoFlat";
+    src: url('./CasinoFlatShadow.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Fredoka";
+    src: url('./Fredoka-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Fredoka One";
+    src: url('./FredokaOne-Regular.ttf') format('truetype');
+}
+
+#font{
+    font-family: "CasinoFlat";
+}
+
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Fredoka";
     margin: 0;
     user-select: none;
+    background-image: url("./Images/backgrounds/background3.jpg");
+}
+.fondo{
+    /*Para el efecto sticky del footer*/
     background-image: url("./Images/backgrounds/background3.jpg");
 }
 
 .sticky{
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
-    z-index: 5;
+    bottom: 0px;
+    z-index: -5;
 }
 
 p{
@@ -40,6 +64,7 @@ p{
     -moz-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
     box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
 }
+
 .barra{
     height: 30px;
     margin-bottom: 80px;
@@ -59,7 +84,7 @@ p{
 .logo{
     display: flex;
     justify-content: center;
-    width: 40%;
+    max-width: 400px;
     max-height: 400px;
 }
 
@@ -133,13 +158,13 @@ p{
 
 .titulo{
     text-align: center;
-    font: 700 4em/1 "Oswald", sans-serif;
+    font: 700 4em/1 "CasinoFlat";
   	letter-spacing: 0;
   	padding: .25em 0 .325em;
 	display: block;
 	margin: 0 auto;
   	text-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
-    background: url(./Images/backgrounds/text1.png) repeat-y;
+    background: url("./Images/backgrounds/text1.png") repeat-y;
 	-webkit-background-clip: text;
 	background-clip: text;
     /*Animar el fondo*/
@@ -175,6 +200,9 @@ p{
 }
 
 h1{
+    font-family: "Fredoka One";
+    font-size: 40px;
+    font-weight: 600;
     -webkit-text-stroke: 1.5px black;
 }
 

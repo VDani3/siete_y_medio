@@ -11,23 +11,79 @@
        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
        <link href="./equipo.css" rel="stylesheet">
        <script src="./script.js"></script>
+       <script src="shadowPartial.js"></script>
        <title>7 y Medio</title>
    </head>
    <body>
-        <shadow-partial class="sticky" data-html="menu.part.html" data-css="menu.part.css"></shadow-partial>
-        <shadow-partial data-html="head.part.html" data-css="head.part.css"></shadow-partial>
-        <div class="persona">
-            <div class="foto">
-
+        <div id="back">
+            <shadow-partial data-html="head.part.html" data-css="head.part.css"></shadow-partial>
+            <shadow-partial class="sticky" data-html="menu.part.html" data-css="menu.part.css"></shadow-partial>
+            <h1 class="titulo">Sobre Nosotros</h1>
+            <p id="uno">Somos un grupo de 3 personas formado por Joel Martín, Alex Pozas y Daniel Villa. <br/>
+               En esta página os explicaremos un poquillo sobre nosotros y qué ha hecho cada uno.<br/></p>
+            <div class="barra"></div>
+            <div class="persona">
+                <div class="foto">
+                    <img src="./Images/nuestro_perfil/dani.png"/>
+                </div>
+                <div class="info">
+                    <h1 class="dani">Daniel Villa</h1>
+                    <p>Estudiante de primer año de CFGS de Desarrollo de Aplicaciones Multiplataforma (DAM). <br/>
+                       En su tiempo libre le gusta jugar/crear a videojuegos y estudiar Japonés. <br/>
+                       Ha colaborado mayoritariamente haciendo esta Web (M4), M5 (Github etc...) y el motor del juego.</p>
+                    <div class="redes">
+                        <table>
+                           <tr>
+                              <th><a href="https://www.instagram.com/_dani3221_/" target="_blank"><img src="./Images/logos/instagram.png"/></a></th>
+                              <th><a href="https://www.linkedin.com/in/danielvillacarmona" target="_blank"><img src="./Images/logos/linkdin.png"/></a></th>
+                           </tr>
+                           <tr>
+                              <td><a href="https://twitter.com/_Danielf3_" target="_blank"><img src="./Images/logos/twitter.png"/></td></a>
+                              <td><a href="https://www.facebook.com/DanielVillaCarmona/" target="_blank"><img src="./Images/logos/facebook.png"/></td></a>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="info">
-
+            <div class="barra"></div>
+            <div class="persona2">
+                <div class="foto2">
+                    <img src="./Images/nuestro_perfil/joel.png"/>
+                </div>
+                <div class="info">
+                    <h1 class="joel">Joel</h1>
+                    <p>Estudiante de primer año de CFGS de Desarrollo de Aplicaciones Web (DAW). <br/>
+                       En su tiempo libre le gusta ver el furbo, practicar deportes y jugar videojuegos. <br/>
+                       Ha colaborado mayoritariamente haciendo la Base de Datos (incluyendo la parte de base de datos del juego [M3]) y el trabajo de M1 (Server, etc...).</p>
+                    <div class="redes">
+                        <table>
+                           <tr>
+                              <th colspan="2"><a href="https://www.instagram.com/j.martin_04/" target="_blank"><img src="./Images/logos/instagram.png"/></a></th>
+                           </tr>
+                           <tr>
+                              <td><a href="https://twitter.com/JMartinT13 " target="_blank"><img src="./Images/logos/twitter.png"/></a></td>
+                              <td><a href="https://www.facebook.com/profile.php?id=100079124865257" target="_blank"><img src="./Images/logos/facebook.png"/></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="barra"></div>
+            <div class="persona">
+                <div class="foto">
+                    <img src="./Images/nuestro_perfil/alex.png"/>
+                </div>
+                <div class="info">
+                    <h1 class="alex">Alex Pozas</h1>
+                    <p>Estudiante de segundo año de CFGS de Desarrollo de Aplicaciones Multiplataforma (DAM). <br/>
+                       En su tiempo libre le gusta leer libros e ir al gimnasio. <br/>
+                       Ha colaborado mayoritariamente haciendo programación (M3).</p>
+                    <div class="redes">
+                    </div>
+                </div>
             </div>
         </div>
-
-
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>y
+        <shadow-partial class="stickyb" data-html="bottom.part.html" data-css="bottom.part.css"></shadow-partial>
    </body>
 </html>
 

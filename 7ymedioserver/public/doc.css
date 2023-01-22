@@ -1,0 +1,112 @@
+@font-face {
+  font-family: "CasinoFlat";
+  src: url('./CasinoFlatShadow.ttf') format('truetype');
+}
+  
+@font-face {
+  font-family: "Fredoka";
+  src: url('./Fredoka-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Fredoka One";
+  src: url('./FredokaOne-Regular.ttf') format('truetype');
+}
+
+#back{
+  background-image: url("./Images/backgrounds/background1.png");
+  min-height: 100vh;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Fredoka";
+  background-image: url("./Images/backgrounds/background1.png");
+  -webkit-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+  color: white;
+  font-size: 1em;
+  width: 100%;
+}
+
+#back h3{
+  text-align: center;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  width: 100%;
+}
+
+.titulo{
+  font-family: "CasinoFlat";
+  text-align: center;
+  font-size: 80px;
+  letter-spacing: 0;
+  padding: .25em 0 0;
+  display: block;
+  margin: 0 auto;
+  text-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+  background: url("./Images/backgrounds/text4.png") repeat-x;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /*Animar el fondo*/
+  -webkit-text-fill-color: transparent;
+  animation: fondo 10s linear infinite;
+  /*Activar la aceleracion de harware para mejor animacion*/
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  /*Hacer borde*/
+  -webkit-text-stroke: 3px rgb(255, 255, 255);
+}
+
+iframe{
+  border: 20px solid rgb(0, 0, 0);
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 0px 13px 33px rgba(0,0,0,0.63); 
+  box-shadow: 0px 0px 13px 10px rgba(0,0,0,0.63);
+  background-color: white;
+}
+
+.vid{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.sticky{
+  max-width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+a{
+  font-weight: 400;
+  color: blue;
+  text-decoration: underline;
+}
+
+/*Animaciones*/
+@keyframes fondo {
+    0% { background-position: 100% 50%; }
+   50% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@media only screen and (min-width: 768px) {
+    .stickyb{
+      position: -webkit-sticky;
+      position: sticky;
+      bottom: 0px;
+      z-index: -5;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  .titulo{
+    box-sizing: border-box;
+    font-size: 45px;
+  }
+}

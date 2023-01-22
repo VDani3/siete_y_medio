@@ -1,0 +1,28 @@
+.bottom{
+    box-sizing: border-box;
+    min-height: 40px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #813800;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.green{
+    color: rgb(184, 255, 187);
+}
+
+.blue{
+    color: rgb(169, 222, 255);
+}
+
+.yellow{
+    color: rgb(255, 255, 158);
+}
+
+.orange{
+    color: rgb(255, 222, 160);
+}

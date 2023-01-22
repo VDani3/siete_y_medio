@@ -1,0 +1,435 @@
+/*Fuentes*/
+@font-face {
+    font-family: "CasinoFlat";
+    src: url('./CasinoFlatShadow.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Fredoka";
+    src: url('./Fredoka-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Fredoka One";
+    src: url('./FredokaOne-Regular.ttf') format('truetype');
+}
+
+#font{
+    font-family: "CasinoFlat";
+}
+
+body {
+    font-family: "Fredoka";
+    margin: 0;
+    user-select: none;
+    background-image: url("./Images/backgrounds/background3.jpg");
+}
+.fondo{
+    /*Para el efecto sticky del footer*/
+    background-image: url("./Images/backgrounds/background3.jpg");
+}
+
+.sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0px;
+    z-index: -5;
+}
+
+p{
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+}
+
+.autocenter { 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    width: 90%;
+    height: 100%;
+    min-height: 300px;
+}
+
+/*Background*/
+.background1{
+    padding-top: 95px;
+    padding-bottom: 95px;
+    background-image: url("./Images/backgrounds/background1.png");
+    -webkit-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+    box-shadow: inset -1px 28px 40px -15px rgba(0,0,0,0.75);
+}
+
+.barra{
+    height: 30px;
+    margin-bottom: 80px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background: rgb(94,40,0);
+    background: linear-gradient(0deg, rgba(94,40,0,1) 8%, rgba(255,151,56,1) 50%, rgba(94,40,0,1) 92%); 
+    -webkit-box-shadow: 0px -15px 13px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -15px 13px 5px rgba(0,0,0,0.75);
+    box-shadow: 0px 15px 23px 35px rgba(0,0,0,0.75);
+}
+.barra img{
+    opacity: 0.5;
+}
+
+/*Cosas del Logo*/
+.logo{
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.logoimg {
+    max-height: 100%;
+    max-width: 100%;
+    transform: scale3d(1, 1, 1);
+    transition: transform 0.5s cubic-bezier(.47,1.64,.41,.8);
+}
+
+.logoimg:hover{
+    transform: scale3d(1.2, 1.2, 1.2);
+}
+
+/*Menu de opciones*/
+.options{
+    --witdhopt: 140px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 20%;
+    max-width: var(--witdhopt);
+    justify-content: center;
+    align-items: center;
+}
+
+.opt{
+    transform: scale3d(1.1, 1.1, 1.1);
+    transition: transform 0.5s cubic-bezier(.47,1.64,.41,.8);
+    width: 140px;
+    max-width: 100%;
+}
+
+.opt:hover{
+    transform: scale3d(1.3, 1.3, 1.3);
+}
+
+.bot{
+    margin-bottom: 30px;
+}
+
+/*Divs de la info*/
+.info{
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 95%;
+    min-height: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.blur2{
+    flex-direction: row-reverse;
+    background: rgba(0, 240, 255, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.1px);
+    -webkit-backdrop-filter: blur(4.1px);
+    border: 1px solid rgba(0, 240, 255, 0.73);
+}
+
+.titulo{
+    text-align: center;
+    font: 700 4em/1 "CasinoFlat";
+  	letter-spacing: 0;
+  	padding: .25em 0 .325em;
+	display: block;
+	margin: 0 auto;
+  	text-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+    background: url("./Images/backgrounds/text1.png") repeat-y;
+	-webkit-background-clip: text;
+	background-clip: text;
+    /*Animar el fondo*/
+	-webkit-text-fill-color: transparent;
+	animation: fondo 80s linear infinite;
+    /*Activar la aceleracion de harware para mejor animacion*/
+    transform: translate3d(0,0,0);
+	backface-visibility: hidden;
+    /*Hacer borde*/
+    -webkit-text-stroke: 3px black;
+}
+
+.text{
+    padding-top: 10px;
+    box-sizing: border-box;
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cien{
+    width: 100%;
+}
+
+.text b{
+    font-size: x-large;
+    font-weight: 900;
+    color:rgb(255, 230, 0);
+}
+
+h1{
+    font-family: "Fredoka One";
+    font-size: 40px;
+    font-weight: 600;
+    -webkit-text-stroke: 1.5px black;
+}
+
+.img{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.img img{
+    width: 30%;
+}
+
+/*Animacion 1*/
+.column {
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.column img{
+    width: 100%;
+}
+
+.animated{
+    opacity: 0;
+    animation: fade infinite 4s;
+}
+
+.anim2:first-child{
+    opacity: 0;
+    animation: anim2-1 infinite 6s;
+}
+
+.anim2:nth-child(3){
+    opacity: 0;
+    animation: anim2-2 infinite 6s;
+}
+
+.anim2:nth-child(4){
+    opacity: 0;
+    animation: anim2-3 infinite 6s;
+}
+
+/*Animacion 2*/
+.banca{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-width: 100%;
+}
+
+.banca img:first-child{
+    max-width: 73%;
+}
+
+.banca img:last-child{
+    max-width: 27%;
+}
+
+.anim3:nth-child(1){
+    animation: anim3-5 infinite 9s;
+}
+
+.banca .anim3:nth-child(2){
+    animation: anim3-6 infinite 9s;
+}
+
+.anim3:nth-child(3){
+    animation: anim3-2 infinite 9s;
+}
+
+.anim3:nth-child(4){
+    animation: anim3-3 infinite 9s;
+}
+
+.anim3:nth-child(5){
+    animation: anim3-1 infinite 9s;
+}
+
+.anim3:nth-child(6){
+    animation: anim3-4 infinite 9s;
+}
+
+
+/*Keyframes*/
+@keyframes fade {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes anim2-1{
+    0%  { opacity: 0; }
+    20% { opacity: 0; }
+    40% { opacity: 0; }
+    60% { opacity: 1; }
+    80% { opacity: 1; }
+    90% { opacity: 1; }
+    100%{ opacity: 0; }
+}
+
+@keyframes anim2-2{
+    0%  { opacity: 0; }
+    20% { opacity: 1; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    80% { opacity: 1; }
+    90% { opacity: 1; }
+    100%{ opacity: 0; }
+}
+
+@keyframes anim2-3{
+    0%  { opacity: 0; }
+    20% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    80% { opacity: 1; }
+    90% { opacity: 1; }
+    100%{ opacity: 0; }
+}
+
+@keyframes anim3-1 {
+    0%   { opacity: 0; }
+    16%  { opacity: 1; }
+    32%  { opacity: 1; }
+    48%  { opacity: 1; }
+    64%  { opacity: 1; }
+    80%  { opacity: 1; }
+    96%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes anim3-2 {
+    0%   { opacity: 0; }
+    16%  { opacity: 0; }
+    32%  { opacity: 1; }
+    48%  { opacity: 1; }
+    64%  { opacity: 1; }
+    80%  { opacity: 1; }
+    96%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes anim3-3 {
+    0%   { opacity: 0; }
+    16%  { opacity: 0; }
+    32%  { opacity: 0; }
+    48%  { opacity: 1; }
+    64%  { opacity: 1; }
+    80%  { opacity: 1; }
+    96%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes anim3-4 {
+    0%   { opacity: 0; }
+    16%  { opacity: 0; }
+    32%  { opacity: 0; }
+    48%  { opacity: 0; }
+    64%  { opacity: 1; }
+    80%  { opacity: 1; }
+    96%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes anim3-5 {
+    0%   { opacity: 1; }
+    16%  { opacity: 1; }
+    32%  { opacity: 1; }
+    48%  { opacity: 1; }
+    64%  { opacity: 0; }
+    80%  { opacity: 0; }
+    96%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes anim3-6 {
+    0%   { opacity: 0; }
+    16%  { opacity: 0; }
+    32%  { opacity: 0; }
+    48%  { opacity: 0; }
+    64%  { opacity: 1; }
+    80%  { opacity: 1; }
+    96%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fondo {
+	0% { background-position: 0% 50%; }
+	100% { background-position: 100% 50%; }
+}
+
+/*Movil*/
+@media only screen and (max-width: 768px) {
+    .logo { 
+        width: 100%;
+    }
+    .options{
+        flex-direction: row;
+        max-width: 100%;
+        width: 100%;
+    }
+    .bot{
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+    .info{
+        flex-direction: column;
+    }
+    .img{
+        width: 100%;
+        padding-top: 10px;
+    }
+    .text{
+        padding-bottom: 10px;
+        width: 100%;
+    }
+    .animated{
+        animation: fade infinite 3s;
+    }
+}
+
+
+
+
